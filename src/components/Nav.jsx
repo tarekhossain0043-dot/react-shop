@@ -76,7 +76,7 @@ const Nav = () => {
                     to={nav.to}
                     className={`${
                       nav.type === "active" ? "text-primary" : "text-secondary"
-                    } flex items-center gap-2`}
+                    } flex items-center gap-2 hover:text-primary`}
                   >
                     {nav.label}
                     {Icon && <Icon className="w-4 h-4" />}
