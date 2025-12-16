@@ -1,17 +1,52 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import EmailBar from "./EmailBar";
 import Footer_Bottom from "./Footer_Bottom";
+import { motion, useAnimation } from "motion/react";
 
 const Footer = () => {
+  const control = useAnimation();
+  useEffect(() => {
+    control.start("visible")
+  },[control])
+  const footerVariant = {
+    hidden : {opacity : 0},
+    visible : 
+    {
+      opacity : 1,
+      transition : {
+        staggerChildren : 0.2
+      }
+    }
+  }
+
+  const footerV1 = {
+    hidden : {opacity : 0,y : -20},
+    visible : {
+      opacity : 1,y : 0,
+      transition : {
+        type : 'spring',
+        stiffness : 100,
+        damping : 15
+      }
+    }
+  }
   return (
     <>
       <div className="bg-[#EEEFFB] text-[#8A8FB9] text-[16px] font-lato font-normal pt-22.5 pb-22.5">
         <div className="container">
-          <div className="grid grid-cols-1 md:grid-cols-[4fr_8fr] gap-10">
+          <motion.div
+          variants={footerVariant}
+          whileInView={{opacity : 1}}
+          viewport={{once : true, amount : 0.5}}
+          initial = 'hidden'
+          animate = {control}
+           className="grid grid-cols-1 md:grid-cols-[4fr_8fr] gap-10">
             {/* left area */}
-            <div className="flex flex-col gap-5">
+            <motion.div
+            variants={footerV1}
+             className="flex flex-col gap-5">
               <Link to="/">
                 <span className="text-[34px] font-bold text-secondary font-josefin capitalize hover:text-primary transition-all duration-300 ease-in-out">
                   hekto
@@ -26,10 +61,12 @@ const Footer = () => {
                   17 Princess Road, London, Greater London NW1 8JR, UK
                 </p>
               </div>
-            </div>
+            </motion.div>
             {/* right area */}
             <div className="grid lg:grid-cols-[4fr_4fr_4fr] md:grid-cols-[6fr_6fr] grid-cols-1 gap-10">
-              <div>
+              <motion.div
+              variants={footerV1}
+              >
                 <h5 className="font-josefin text-black font-semibold text-[22px] mb-10">
                   Catagories
                 </h5>
@@ -56,8 +93,10 @@ const Footer = () => {
                     </Link>
                   </li>
                 </ul>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+              variants={footerV1}
+              >
                 <h5 className="font-josefin text-black font-semibold text-[22px] mb-10">
                   Customer Care
                 </h5>
@@ -78,8 +117,10 @@ const Footer = () => {
                     <Link to="/OrderTracking">Order Tracking</Link>
                   </li>
                 </ul>
-              </div>
-              <div>
+              </motion.div>
+              <motion.div
+              variants={footerV1}
+              >
                 <h5 className="font-josefin text-black font-semibold text-[22px] mb-10">
                   Pages
                 </h5>
@@ -105,9 +146,9 @@ const Footer = () => {
                     <Link to="/WooCommercePages">WooCommerce Pages</Link>
                   </li>
                 </ul>
-              </div>
+              </motion.div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
       <Footer_Bottom />

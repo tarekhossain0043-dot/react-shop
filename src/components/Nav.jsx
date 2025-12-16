@@ -1,8 +1,9 @@
 import { ChevronDown } from "lucide-react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as lucideIcon from "lucide-react";
 import { Link } from "react-router-dom";
 import SearchBar from "./SearchBar";
+import { motion, scale } from "motion/react";
 
 const Nav = () => {
   const nav_menu = [
@@ -56,8 +57,33 @@ const Nav = () => {
       label: "Contact",
     },
   ];
+  
+  const [sticky, setSticky] = useState(false);
+  const handleScroll = () => {
+    if (window.scrollY > 40) {
+      setSticky(true);
+    } else {
+      setSticky(false);
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
   return (
-    <div className="mt-5 mb-5 bg-transparent">
+    <motion.div
+      initial={{scale : 0}}
+      animate={sticky ? { y: 0, opacity: 1,scale : 1} : { opacity: 1, y: 5,scale : 1 }}
+      transition={{ duration: 0.6, delay: 0.7 }}
+      className={`${
+        sticky
+          ? "fixed top-0 left-0 w-full bg-slate-50 shadow-sm backdrop-blur-md z-9999 py-3"
+          : "pb-3 relative bg-slate-50 z-9999"
+      } bg-transparent`}
+    >
       <div className="container flex-1 px-4 md:px-6 lg:px-7 xl:px-8 flex items-center gap-10 justify-between ">
         {/* nav left */}
         <div className="flex w-full items-center gap-22 max-[300px]:gap-10">
@@ -82,7 +108,7 @@ const Nav = () => {
                     {Icon && <Icon className="w-4 h-4" />}
                   </Link>
                   {nav.submenu && nav.submenu.length > 0 && (
-                    <ul className="w-40 group-hover:block hidden group-hover:translate-y-0 translate-y-7 absolute top-full left-0 transition-all duration-500 ease-in-out bg-slate-100 text-slate-400">
+                    <ul className="w-40 group-hover:block hidden group-hover:translate-y-0 translate-y-7 absolute z-999999 top-full left-0 transition-all duration-500 ease-in-out bg-slate-100 text-slate-400">
                       {nav.submenu.map((subitem) => (
                         <li
                           key={subitem.id}
@@ -126,7 +152,7 @@ const Nav = () => {
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
