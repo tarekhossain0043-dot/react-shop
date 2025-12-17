@@ -11,9 +11,17 @@ import Pages from "./pages/Pages";
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
+import { motion, useScroll } from "motion/react";
 const App = () => {
+  const { scrollYProgress } = useScroll();
   return (
     <>
+      <div className="fixed z-9999999 bottom-5 w-2 h-full bg-slate-300 rounded-full right-5 max-h-40">
+        <motion.div
+          style={{ scaleY: scrollYProgress, originY: 0 }}
+          className={`absolute top-0 left-0 rounded-full w-full h-full bg-primary`}
+        ></motion.div>
+      </div>
       <Header />
       <Routes>
         <Route index element={<Home />} />

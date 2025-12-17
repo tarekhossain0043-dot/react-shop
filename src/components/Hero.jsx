@@ -4,6 +4,7 @@ import { Pagination, Autoplay } from "swiper/modules";
 import CustomArrowForSlider from "./CustomArrowForSlider";
 import "swiper/css";
 import Btn from "./Btn";
+import { motion } from "motion/react";
 // import "swiper/css/navigation";
 // import "swiper/css/pagination";
 
@@ -24,13 +25,21 @@ const Hero = () => {
         <SwiperSlide>
           <div className="grid grid-cols-1 lg:grid-cols-[8fr_4fr] items-center gap-5 py-10">
             <div className="text-left static lg:relative lg:pl-50">
-              <div className="absolute -top-30 left-0 hidden lg:block">
+              <motion.div
+                drag
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+                dragElastic={0.4}
+                whileDrag={{
+                  scale: 1.2,
+                }}
+                className="absolute -top-30 left-0 hidden lg:block"
+              >
                 <img
                   src="/absolute-hero-img.svg"
                   alt="absolute-hero"
                   className="w-60"
                 />
-              </div>
+              </motion.div>
               <p className="font-hero-lato mb-3 font-bold text-[16px] leading-7 text-hero-primary">
                 Best Furniture For Your Castle....
               </p>
@@ -44,13 +53,20 @@ const Hero = () => {
               </p>
               <Btn />
             </div>
-            <div>
+            <motion.div
+              drag
+              dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+              dragElastic={0.4}
+              whileDrag={{
+                scale: 1.2,
+              }}
+            >
               <img
                 src="/hero-sofa (2).svg"
                 alt="hero-img"
                 className="w-full max-h-170"
               />
-            </div>
+            </motion.div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
