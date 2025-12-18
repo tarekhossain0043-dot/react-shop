@@ -13,7 +13,7 @@ const Modal = ({ children }) => {
     <div
       className={`${
         isOpenModal ? "hidden" : ""
-      } absolute top-0 left-0 w-full h-screen overflow-y-scroll lg:hidden bg-slate-400 opacity-80`}
+      } absolute z-99999 top-0 left-0 w-full h-screen overflow-y-scroll lg:hidden bg-slate-400 opacity-80`}
     >
       {children}
       <X
