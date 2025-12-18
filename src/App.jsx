@@ -11,6 +11,7 @@ import Pages from "./pages/Pages";
 import Blog from "./pages/Blog";
 import Shop from "./pages/Shop";
 import Contact from "./pages/Contact";
+import Product_details from "./pages/Product_details";
 const App = () => {
   return (
     <>
@@ -31,6 +32,7 @@ const App = () => {
         <Route path="/blog" element={<Blog />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/product_details/:id" element={<Product_details />} />
         {/* <Route
           path="/search-bar"
           element={

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { featureProduct } from "../assets/assets";
+import { Link } from "react-router-dom";
 const Feature_Product = () => {
   // const [productImgBg, setProductImgBg] = useState("#F6F7FB");
   const [productImgBg, setProductImgBg] = useState({});
@@ -22,7 +23,7 @@ const Feature_Product = () => {
             return (
               <div
                 key={product.id}
-                className="rounded-sm group cursor-pointer transition-all duration-300 ease-in-out text-sm relative capitalize text-center shadow-lg"
+                className="rounded-sm z-10 group cursor-pointer transition-all duration-300 ease-in-out text-sm relative capitalize text-center shadow-lg"
               >
                 <div
                   style={{ backgroundColor: currentProductBg }}
@@ -33,9 +34,12 @@ const Feature_Product = () => {
                     alt="product-img"
                     className="h-full w-full"
                   />
-                  <button className="bg-[#08D15F] opacity-0 transition-all duration-300 ease-in-out transform translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 truncate absolute bottom-3 shadow-sm rounded-sm leading-none text-white px-3.25 py-2 text-[12px] font-josefin capitalize font-medium">
+                  <Link
+                    to={`/product_details/${product.id}`}
+                    className="bg-[#08D15F] opacity-0 transition-all duration-300 ease-in-out transform translate-y-5 group-hover:opacity-100 group-hover:translate-y-0 truncate absolute bottom-3 shadow-sm rounded-sm leading-none text-white hover:bg-primary hover:text-white cursor-pointer px-3.25 py-2 text-[12px] font-josefin capitalize font-medium"
+                  >
                     View Details
-                  </button>
+                  </Link>
                 </div>
                 <div className="bg-white relative z-10 group-hover:after:h-full after:transition-all after:duration-500 after:opacity-90 after:-z-1 after:ease-in-out after:absolute after:bottom-0 after:left-0 after:w-full after:h-0 after:content-[''] after:bg-[#2F1AC4] group-hover:text-white transition-all duration-300 ease-in-out text-center px-10 py-5">
                   <p className="mb-4 font-bold text-lg font-lato group-hover:text-white text-primary">
