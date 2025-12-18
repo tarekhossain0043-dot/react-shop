@@ -5,12 +5,29 @@ import { motion, useInView } from "motion/react";
 const ProductTabs = () => {
   const [activeTabs, setActiveTab] = useState("description");
   const activeTab = productTabs.find((tab) => tab.id === activeTabs);
+  const productDesVariant = {
+    hidden: {
+      opacity: 0,
+      y: -10,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 2,
+        delay: 0.2,
+        type: "spring",
+        stiffness: 400,
+        damping: 10,
+      },
+    },
+  };
 
   return (
     <div className="bg-[#F9F8FE] py-26.75">
-      <div className="container">
+      <motion.div variants={productDesVariant} className="container">
         {/* top filter tabs */}
-        <ul className="mb-15">
+        <motion.ul initial="hidden" animate="visible" className="mb-15">
           {productTabs.map((tabs, index) => {
             return (
               <button
@@ -20,13 +37,13 @@ const ProductTabs = () => {
                   activeTabs === tabs.id
                     ? "text-primary relative after:absolute after:bottom-0 after:left-0 after:w-full after:h-px after:bg-primary after:content-['']"
                     : "text-[#151875]"
-                } mr-20 inline-block  font-semibold font-josefin cursor-pointer transition-all duration-300 ease-in-out hover:text-primary`}
+                } md:mr-20 flex flex-col mb-3 items-center gap-5 md:inline-block  font-semibold font-josefin cursor-pointer transition-all duration-300 ease-in-out hover:text-primary`}
               >
                 {tabs.label}
               </button>
             );
           })}
-        </ul>
+        </motion.ul>
         {/* description data */}
         <div className="flex flex-col gap-9 transition-all duration-500 ease-in-out">
           <div className="flex flex-col gap-3.5 text-left">
@@ -77,7 +94,7 @@ const ProductTabs = () => {
             </form>
           </div>
         )}
-      </div>
+      </motion.div>
     </div>
   );
 };
