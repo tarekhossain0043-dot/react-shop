@@ -5,6 +5,7 @@ import CustomArrowForSlider from "./CustomArrowForSlider";
 import "swiper/css";
 import Btn from "./Btn";
 import { useAnimation, motion } from "motion/react";
+import { motion } from "motion/react";
 // import "swiper/css/navigation";
 // import "swiper/css/pagination";
 
@@ -61,6 +62,12 @@ const Hero = () => {
             <div className="text-left static lg:relative lg:pl-50">
               <motion.div
                 variants={item}
+                drag
+                dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+                dragElastic={0.4}
+                whileDrag={{
+                  scale: 1.2,
+                }}
                 className="absolute -top-30 left-0 hidden lg:block"
               >
                 <img
@@ -73,6 +80,7 @@ const Hero = () => {
                 variants={item}
                 className="font-hero-lato mb-3 font-bold text-[16px] leading-7 text-hero-primary"
               >
+              <p className="font-hero-lato mb-3 font-bold text-[16px] leading-7 text-hero-primary">
                 Best Furniture For Your Castle....
               </motion.p>
               <motion.h2
@@ -92,6 +100,14 @@ const Hero = () => {
               <Btn />
             </div>
             <motion.div variants={item}>
+            <motion.div
+              drag
+              dragTransition={{ bounceStiffness: 600, bounceDamping: 20 }}
+              dragElastic={0.4}
+              whileDrag={{
+                scale: 1.2,
+              }}
+            >
               <img
                 src="/hero-sofa (2).svg"
                 alt="hero-img"
@@ -99,6 +115,7 @@ const Hero = () => {
               />
             </motion.div>
           </motion.div>
+          </div>
         </SwiperSlide>
         <SwiperSlide>
           <motion.div
