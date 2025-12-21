@@ -6,18 +6,18 @@ import {
   ShoppingCartIcon,
   User,
 } from "lucide-react";
-import { useDispatch, useSelector } from "react-redux";
-import { setCurrenc, setLang } from "../features/language/languageSlice";
+// import { useDispatch, useSelector } from "react-redux";
+// import { setCurrenc, setLang } from "../features/language/languageSlice";
 
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Nav from "./Nav";
 import { motion } from "motion/react";
 
 const Header = () => {
-  const dispatch = useDispatch();
-  const setLanguage = useSelector((state) => state.language.language);
-  const setCurr = useSelector((state) => state.language.currency);
+  // const dispatch = useDispatch();
+  // const setLanguage = useSelector((state) => state.language.language);
+  // const setCurr = useSelector((state) => state.language.currency);
 
   // language
   const lang = [
@@ -32,18 +32,21 @@ const Header = () => {
     { code: "rupi", label: "Rupi" },
   ];
   const [isOpen, setIsOpen] = useState(false);
-  const [isCurr, setIsCurr] = useState(false);
-  const currentCurrency = curr.find((cur) => cur.code === setCurr);
-  const currentLang = lang.find((lang) => lang.code === setLanguage);
+  const [selected, setSelected] = useState(defaultValue);
+  const dropdownRef = useRef(null);
+  // // const [isCurr, setIsCurr] = useState(false);
+  // const currentCurrency = curr.find((cur) => cur.code === setCurr);
+  // const currentLang = lang.find((lang) => lang.code === setLanguage);
 
-  const setCurrency = (currCode) => {
-    dispatch(setCurrenc(currCode));
-  };
-  const selectLang = (langCode) => {
-    dispatch(setLang(langCode));
-  };
+  // const handleToggle = (toggleMenu) => {
+  //   dispatch(setCurrenc(toggleMenu));
+  //   dispatch(setLang(toggleMenu))
+  // };
+  // // const selectLang = (langCode) => {
+  // //   dispatch(setLang(langCode));
+  // // };
 
-  // login or not
+  // // login or not
   const [userLogin, setUserLogin] = useState(false);
 
   return (
@@ -83,15 +86,15 @@ const Header = () => {
                   >
                     {" "}
                     {/* // show selected lang */}
-                    {currentLang ? currentLang.label : "select language"}
+                    {/* {currentLang ? currentLang.label : "select language"} */}
                     <ChevronDown className="w-4 h-4" />
                   </span>
                   {isOpen && (
-                    <ul className="absolute top-full left-0 w-full cursor-pointer bg-slate-300 text-slate-700 capitalize">
+                    <ul className="absolute z-99999 top-full left-0 w-full cursor-pointer bg-slate-300 text-slate-700 capitalize">
                       {lang.map((lang) => (
                         <li
                           className="px-2 py-1 bg-slate-200 text-xs hover:bg-slate-300 text-slate-600"
-                          onClick={() => selectLang(lang.code)}
+                          // onClick={() => selectLang(lang.code)}
                           key={lang.code}
                         >
                           {lang.label}
@@ -105,27 +108,27 @@ const Header = () => {
                 <div className="relative cursor-pointer w-20">
                   <span
                     className="w-full text-center flex items-center gap-3"
-                    onClick={() => setIsCurr((prev) => !prev)}
+                    // onClick={() => setIsCurr((prev) => !prev)}
                   >
                     {" "}
                     {/* // show selected lang */}
-                    {currentCurrency ? currentCurrency.label : "Usd"}{" "}
+                    {/* {currentCurrency ? currentCurrency.label : "Usd"}{" "} */}
                     <ChevronDown className="w-4 h-4" />
                   </span>
-                  {isCurr && (
-                    <ul className="absolute top-full text-xs left-0 w-full bg-slate-300 text-slate-700 capitalize">
-                      {curr.map((lang) => (
-                        <li
-                          className="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600"
-                          onClick={() => setCurrency(lang.code)}
-                          key={lang.code}
-                        >
-                          {lang.label}
-                        </li>
-                      ))}
-                      {/* // show lang */}
-                    </ul>
-                  )}
+                  {/* {isCurr && ( */}
+                  <ul className="absolute top-full z-99999 text-xs left-0 w-full bg-slate-300 text-slate-700 capitalize">
+                    {curr.map((lang) => (
+                      <li
+                        className="px-2 py-1 bg-slate-200 hover:bg-slate-300 text-slate-600"
+                        // onClick={() => setCurrency(lang.code)}
+                        key={lang.code}
+                      >
+                        {lang.label}
+                      </li>
+                    ))}
+                    {/* // show lang */}
+                  </ul>
+                  {/* )} */}
                 </div>
                 {/* login  */}
                 <div className="flex items-center gap-2">
